@@ -1,0 +1,43 @@
+classDiagram
+direction LR
+
+utilisateur "1" -- "1..*" demande
+utilisateur "1" -- "1..*" offre
+Admin "1" -- "1..*" offre
+demande "1" -- "1..*" offre
+Admin "1" -- "1..*" demande
+Admin "1" -- "1..*" utilisateur
+
+class utilisateur {
+utilisateur: +String Nom
+utilisateur: +String Prenom
+utilisateur: +String email
+utilisateur: +nomber phone
+utilisateur: +int id
+utilisateur: +signup()
+utilisateur: +signin()
++AjouterSesAnnonces(details)
++ModifierSesAnnonces(id)
++SupprimerSesAnnonces(id)
+}
+
+class Admin{
+    +login()
+    +ModifierUtilisateur(id)
+    +SupprimerUtilisateur(id)
+    +ModifierAnnonces(id)
+    +SupprimerAnnonces(id)
+    +int id
+}
+class offre {
+    +String NomdeBook 
+    +String TypedeBook
+    +string descriptions
+    +String image
+    +int id
+}
+class demande{
+    +String NomdeBook
+    +int id
+}
+  
