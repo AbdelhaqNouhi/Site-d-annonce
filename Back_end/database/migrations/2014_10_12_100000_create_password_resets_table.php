@@ -13,15 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('offre', function (Blueprint $table) {
-            $table->id()->unique();
-            $table->string('book');
-            $table->string('type');
-            $table->string('descriptions');
-            $table->string('image');
-            $table->float('prix');
-            $table->foreignId('utilisateur_id');
-            $table-> foreign('utilisateur_id')->references('id')->on('utilisateur')->onDelete('cascade')->onUpdate('cascade');
+        Schema::create('password_resets', function (Blueprint $table) {
+            $table->string('email')->index();
+            $table->string('token');
+            $table->timestamp('created_at')->nullable();
         });
     }
 
