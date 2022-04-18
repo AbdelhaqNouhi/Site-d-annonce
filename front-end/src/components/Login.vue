@@ -103,7 +103,7 @@ export default {
 .hh{
     display: flex;
     justify-content: center;
-    margin: 90px 0;
+    margin: 90px auto;
     h1{
         font-size: 1.5rem;
         margin-bottom:  2rem;

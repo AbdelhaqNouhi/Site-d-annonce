@@ -69,7 +69,7 @@ export default {
 .hh{
     display: flex;
     justify-content: center;
-    margin: 82px 0;
+    margin: 82px auto;
 }
 
 form{

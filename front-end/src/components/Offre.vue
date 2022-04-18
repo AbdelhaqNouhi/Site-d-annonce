@@ -1,63 +1,62 @@
 <template>
-    <div>
-        <div class="hh">
-            <div class="col-11 col-lg-10 p-0 sing_up">
-                <form class="form" @submit.prevent="Reserve">
-                    <h3>Reserve Now</h3>
-                    <label>Date</label>
-                    <input
-                    @change="Get_date_rdv"
-                        class="go"
-                        type="date"
-                        name="date"
-                        placeholder="Date"
-                        required
-                        v-model="form.date"
-                        :min="new Date().toISOString().substr(0, 10)"
+<div>
+    <div class="container col-lg-8 col-sm-12 post">
+        <div class="col-lg-12 col-sm-12">
+            <div class="user">
+                <div class="media">
+                    <img
+                        src="https://images.pexels.com/photos/302743/pexels-photo-302743.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                        class="rounded-circle"
+                        alt=""
                     />
-                        <label>Creneau</label>
-                        <select v-if="this.form.date" v-model="form.creneau" class="go">
-                            <option v-for="time in times" :key="time.date">
-                                {{ time.date }}
-                            </option>
-                        </select>
+                </div>
+                <div class="text">
+                    <div class="media-body ml-3 mt-3">hhhhhhhhhh</div>
+                    <div class="text-muted small">gggggggggg</div>
+                </div>
 
-                    <label>Sujet</label>
-                    <textarea
-                        class="go"
-                        name="Sujet"
-                        placeholder="Message"
-                        required
-                        v-model="form.sujet"
-                    ></textarea>
-                    <button class="go botton" name="regester">Reserve</button>
+                <form>
+                    <div>
+                        <a data-bs-toggle="dropdown"
+                            ><svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="bi bi-three-dots point"
+                                viewBox="0 0 16 16"
+                            >
+                                <path
+                                    d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                                /></svg
+                        ></a>
+
+                        <ul class="dropdown-menu">
+                            <input type="hidden" name="id" value="" />
+                            <input class="dropdown-item" type="submit" name="delete" value="Delete"/>
+
+                            <input type="hidden" name="title" value="" />
+                            <input type="hidden" name="description" value="" />
+                            <input type="hidden" name="url" value="" />
+                            <input type="hidden" name="id" value="" />
+                            <input type="submit" class="dropdown-item" name="edit" value="Update"/>
+                        </ul>
+                    </div>
                 </form>
-                <div class="res">
-                    <div class="title">
-                        <strong>date</strong>
-                        <strong>creneau</strong>
-                        <strong>sujet</strong>
-                        <strong>More</strong>
-                    </div>
-                    <div class="title" v-for="list in lists" :key="list.id">
-                        <span>{{ list.date }}</span>
-                        <span>{{ list.creneau }}</span>
-                        <span>{{ list.sujet }}</span>
+            </div>
 
-                        <div v-if="lists" class="btn">
-                            <button class="btn botton" @click="Update">
-                                update
-                            </button>
-                            <button class="btn botton" @click="Delete(list.id)">
-                                delete
-                            </button>
-                        </div>
-                    </div>
+            <div class="text mt-4">
+                <div class="titel">
+                    <h4>Lorem ipsum dolor</h4>
+                </div>
+                <div>
+                    <p>Lorem ipsum dolor sit amet consectetur</p>
                 </div>
             </div>
         </div>
-        <Footer />
+        <div>
+            <img src="https://images.pexels.com/photos/302743/pexels-photo-302743.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="w-100 img-post" alt="..." />
+        </div>
     </div>
+    <Footer />
+</div>
 </template>
 
 <script>
@@ -88,9 +87,7 @@ export default {
         };
     },
     methods: {
-        filter_ceeneau () {
-
-        },
+        filter_ceeneau() {},
 
         Get_rdv() {
             this.id = Cookies.get("id");
@@ -123,15 +120,17 @@ export default {
                 }
             ).then((res) => res.json());
         },
-         async Get_date_rdv() {
-             let date = this.form.date;
+        async Get_date_rdv() {
+            let date = this.form.date;
             const res = await fetch(
-                `http://localhost/gestion-rndv/back-end/controllers/C-lire_time_rdv.php?date=${date}`   
+                `http://localhost/gestion-rndv/back-end/controllers/C-lire_time_rdv.php?date=${date}`
             );
             const result = await res.json();
-            if(result != "errore"){
-                this.time_creneau = result.map(r => r.creneau);
-                this.times =  this.times.filter((i) => !this.time_creneau.includes(i.date));
+            if (result != "errore") {
+                this.time_creneau = result.map((r) => r.creneau);
+                this.times = this.times.filter(
+                    (i) => !this.time_creneau.includes(i.date)
+                );
             }
         },
     },
@@ -143,68 +142,42 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.hh {
-    // margin: auto 0;
-    display: flex;
-    justify-content: center;
-    // height: 75vh;
-    margin: 82px 0;
+.post{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 0 2rem 0;
+  background-color: #D1D5DB;	
+  border-radius: 1rem;
+    margin: 82px auto;
 }
-.sing_up {
-    display: flex;
-    flex-direction: column;
-    height: 35rem;
-    border-radius: 0.5rem;
-    @media only screen and(min-width: 992px) {
-        display: flex;
-        flex-direction: row;
-        gap: 0;
-    }
+.user {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
-.res {
-    border-radius: 0.5rem;
-    height: 100%;
-    width: 100%;
-    background-color: #6998ab;
-    .title {
-        padding: 1rem 0;
-        border: 1px solid white;
-        border-radius: 0.5rem;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        width: 100%;
-        place-items: center;
-        text-align: center;
-    }
+.media {
+  margin-left: 1rem;
+  margin-top: 1rem;
+  img {
+    width: 3rem;
+    height: 3rem;
+  }
 }
-.form {
-    padding: 2rem;
-    height: 100%;
-    width: 100%;
-    border-radius: 0.5rem;
-    background-color: #b1d0e0;
-    // width: 5rem;
-    h3 {
-        padding: 0rem 0 2rem;
-        text-align: center;
-    }
+.text {
+  color: #000000;
+  margin-left: 1rem;
 }
-.go {
-    border-radius: 0.5rem;
-    border: none;
-    width: 100%;
-    margin: 0 0 2rem;
-    padding: 0.5rem 0.5rem;
-    font-size: 14px;
+.titel{
+  color: #000000;
 }
-.botton {
-    color: white;
-    background-color: #1a374d;
-}
-.btn {
-    display: flex;
-    border-radius: 0.5rem;
-    border: none;
-    font-size: 10px;
+.spa{
+    width: fit-content;
+    margin: 1rem;
+    padding: 0.5rem;
+    color: #000000;
+    background-color: #000000;
+    border-radius: 0.5rem;  
+    border: 1px solid #000000; 
 }
 </style>
