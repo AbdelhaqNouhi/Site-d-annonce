@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('offres', function (Blueprint $table) {
             $table->id();
-            $table->string('book');
+            $table->string('title');
             $table->string('type');
             $table->string('descriptions');
             $table->string('image');

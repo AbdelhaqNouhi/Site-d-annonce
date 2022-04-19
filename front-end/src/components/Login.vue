@@ -5,9 +5,9 @@
             <form>
             <h1>Sing_in</h1>
                 <label>E-mail</label>
-                    <input type="text" name="email" placeholder="E-mail" v-model="reference_client">
+                    <input type="text" name="email" placeholder="E-mail" v-model="email">
                 <label>Password</label>
-                    <input type="text" name="password" placeholder="Password" v-model="reference_client">
+                    <input type="text" name="password" placeholder="Password" v-model="Password">
                     <input class="botton" type="submit" name="reserve" value="Login" @click.prevent="login">        
             </form>
         </div>
@@ -17,10 +17,16 @@
 </template>
 
 <script>
-import { ref } from "vue";
-import swal from 'sweetalert';
+import { ref } from "vue";;
 import Cookies from 'js-cookie';
 import Footer from './Footer.vue';
+
+const header = {
+    'content-type': 'application/json',
+     'Access-Control-Allow-Methods': 'POST', 
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type', 
+};
 
 export default {
     name: "Login",
@@ -28,6 +34,20 @@ export default {
     components: {
         Footer,
     },
+    data() {
+        return {
+            email: "",
+            password: "",
+        }
+    },
+    methods: {
+        login() {
+            fetch('http://127.0.0.1:8000/api/users', {
+                method: 'POST',
+                headers: header,   
+            })
+        }
+    }
 };
 </script>
 

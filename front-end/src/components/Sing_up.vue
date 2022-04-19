@@ -7,7 +7,7 @@
                 <label>Nom</label>
                 <input required type="text" name="nom" placeholder="Nom" v-model="nom">
                 <label>Prenome</label>
-                <input required type="text" name="prenome" placeholder="Prenome" v-model="prenom">
+                <input required type="text" name="prenome" placeholder="Prenome" v-model="prenome">
                 <label>E-mail</label>
                 <input required type="text" name="email" placeholder="E-mail" v-model="email">
                 <label>Password</label>
@@ -21,15 +21,46 @@
 </template>
 
 <script>
+// import { METHODS } from "http";
 import Nav from "../components/Nav";
 import Footer from './Footer.vue';
-
+  
+const header = {
+    'content-type': 'application/json',
+     'Access-Control-Allow-Methods': 'POST', 
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type', 
+};
+ 
 export default {
     name: "Sing_up",
     components: {
         Nav,
         Footer,
     },
+    data() {
+        return {
+            nom: "",
+            prenom: "",
+            email: "",
+            password: "",
+        }
+    },
+    methods: {
+        register() {
+            fetch('http://localhost:8000/api/register', {
+                method: 'POST',
+                headers: header,
+                body : JSON.stringify({
+                    nom: this.nom,
+                    prenome: this.prenome,
+                    email: this.email,
+                    password: this.password,
+                }),
+            }).then((res) => res.json())
+                console.log(this.nom, this.prenome, this.email, this.password);
+        }
+    }
 }
 </script>
 
@@ -54,6 +85,7 @@ form{
     }
 }
     input{
+        color: #000000;
         border-radius: 0.5rem;
         border: none;
         width: 100%;

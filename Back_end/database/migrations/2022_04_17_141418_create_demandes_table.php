@@ -15,7 +15,10 @@ return new class extends Migration
     {
         Schema::create('demandes', function (Blueprint $table) {
             $table->id();
-            $table->string('book');
+            $table->string('title');
+            $table->string('type');
+            $table->string('descriptions');
+            $table->string('image');
             $table->foreignId('user_id');
             $table-> foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

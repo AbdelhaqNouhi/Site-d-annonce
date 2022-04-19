@@ -6,9 +6,7 @@
             </div>
             <div>
                 <button data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add Offre</button>
-            </div>
-           
-            
+            </div>   
         </div>
         <div class="container col-12 col-lg-8 post">
             <div class="col-12 col-lg-7">
@@ -79,29 +77,8 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                    <h2 class="modal-title" id="staticBackdropLabel">Add Post</h2>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <input type="text" name="title" placeholder="title">
-                </div>
-                <div class="modal-body">
-                    <input type="text" name="description" placeholder="description">
-                </div>
-                <div class="modal-body">
-                    <input type="text" name="url" placeholder="URL:">
-                </div>
-                <div class="modal-footer">
-                    <input class="btn w-100" type="Submit" name="Goo" value="Goo">
-                </div>
-            </div>
-            </div>
-            </div>
     <Footer />
+    <Add />
 </div>
 </template>
 
@@ -109,13 +86,16 @@
 import Cookies from "js-cookie";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
+import Add from "../components/Add";
 const client_Id = Cookies.get("id");
 export default {
     name: "Offre",
     components: {
-        Nav,
-        Footer,
-    },
+    Nav,
+    Footer,
+    Add,
+    Add
+},
 }; 
 </script>
 
@@ -215,32 +195,5 @@ button {
     color: white;
     background-color: #111827;
     margin: 2rem auto;   
-}
-.modal-content{
-    background-color: #D1D5DB;
-    height: 30rem;
-}
-.modal-body input{
-  width: 100%;
-}
-.modal-title{
-    color: #000000;
-}
-.modal-body input{
-  padding: 1rem;
-  border-radius: 0.5rem;
-  border: #d1d5db 1px solid;
-}
-.modal-footer{
-  :hover{
-    color: #d1d5db;
-  }
-  
-  input{
-    color: #d1d5db;
-    background-color: #000000;
-    border-radius: 0.5rem;
-    border: #000000 1px solid;
-  }
 }
 </style>
