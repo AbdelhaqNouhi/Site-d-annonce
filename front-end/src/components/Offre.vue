@@ -1,60 +1,81 @@
 <template>
-<div>
-    <div class="container col-lg-8 col-sm-12 post">
-        <div class="col-lg-12 col-sm-12">
-            <div class="user">
-                <div class="media">
-                    <img
-                        src="https://images.pexels.com/photos/302743/pexels-photo-302743.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                        class="rounded-circle"
-                        alt=""
-                    />
-                </div>
-                <div class="text">
-                    <div class="media-body ml-3 mt-3">hhhhhhhhhh</div>
-                    <div class="text-muted small">gggggggggg</div>
-                </div>
-
-                <form>
-                    <div>
-                        <a data-bs-toggle="dropdown"
-                            ><svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="bi bi-three-dots point"
-                                viewBox="0 0 16 16"
-                            >
-                                <path
-                                    d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
-                                /></svg
-                        ></a>
-
-                        <ul class="dropdown-menu">
-                            <input type="hidden" name="id" value="" />
-                            <input class="dropdown-item" type="submit" name="delete" value="Delete"/>
-
-                            <input type="hidden" name="title" value="" />
-                            <input type="hidden" name="description" value="" />
-                            <input type="hidden" name="url" value="" />
-                            <input type="hidden" name="id" value="" />
-                            <input type="submit" class="dropdown-item" name="edit" value="Update"/>
-                        </ul>
+    <div>
+        <div class="container hh">
+            <div>
+                <input type="text" placeholder="Search">
+            </div>
+            
+        </div>
+        <div class="container col-12 col-lg-8 post">
+            <div class="col-12 col-lg-7">
+                <img
+                    src="https://images.pexels.com/photos/302743/pexels-photo-302743.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                    class="w-100 P-0 img-post"
+                    alt="..."
+                />
+            </div>
+            <div class="col-12 col-lg-5">
+                <div class="user">
+                    <div class="media m-0">
+                        <img
+                            src="https://images.pexels.com/photos/302743/pexels-photo-302743.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                            class="rounded-circle"
+                            alt=""
+                        />
                     </div>
-                </form>
-            </div>
+                    <div class="text">
+                        <div class="media-body m-0">hhhhhhhhhh</div>
+                        <div class="text-muted small">gggggggggg</div>
+                    </div>
 
-            <div class="text mt-4">
-                <div class="titel">
-                    <h4>Lorem ipsum dolor</h4>
+                    <form>
+                        <div class="more">
+                            <a data-bs-toggle="dropdown"
+                                ><svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="bi bi-three-dots point"
+                                    viewBox="0 0 16 16"
+                                >
+                                    <path
+                                        d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                                    /></svg
+                            ></a>
+
+                            <ul class="dropdown-menu">
+                                <input
+                                    class="dropdown-item"
+                                    type="submit"
+                                    name="delete"
+                                    value="Delete"
+                                />
+                                <input
+                                    type="submit"
+                                    class="dropdown-item"
+                                    name="edit"
+                                    value="Update"
+                                />
+                            </ul>
+                        </div>
+                    </form>
                 </div>
-                <div>
-                    <p>Lorem ipsum dolor sit amet consectetur</p>
+
+                <div class="text mt-5">
+                    <div class="titel">
+                        <h4>Lorem ipsum dolor</h4>
+                    </div>
+                    <div>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur quisquam ipsum laboriosam earum consequatur facere dolorum quis, architecto exercitationem nostrum nisi</p>
+                    </div>
+                    <div>
+                        <h5 class="font-weight-bold">Prix: 299 $</h5>
+                    </div>
+                    <div>
+                        <button class="demende">Demende Now</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <div>
-            <img src="https://images.pexels.com/photos/302743/pexels-photo-302743.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="w-100 img-post" alt="..." />
-        </div>
-    </div>
+        
     <Footer />
 </div>
 </template>
@@ -142,42 +163,134 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.post{
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  padding: 0 0 2rem 0;
-  background-color: #D1D5DB;	
-  border-radius: 1rem;
+.post {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1rem;
+    background-color: #d1d5db;
+    border-radius: 0.5rem;
     margin: 82px auto;
+
+     @media only screen and(min-width: 992px){
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+    }
+
+    img{
+         border-radius: 0.5rem;
+    }
 }
 .user {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    form{
+        margin-left: auto;
+    }
 }
 .media {
-  margin-left: 1rem;
-  margin-top: 1rem;
-  img {
-    width: 3rem;
-    height: 3rem;
-  }
+    margin-left: 1rem;
+    margin-top: 1rem;
+    img {
+        width: 3rem;
+        height: 3rem;
+    }
 }
 .text {
-  color: #000000;
-  margin-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    color: #000000;
+    // margin-left: 1rem;
 }
-.titel{
-  color: #000000;
+.titel {
+    color: #000000;
 }
-.spa{
+.spa {
     width: fit-content;
     margin: 1rem;
     padding: 0.5rem;
     color: #000000;
     background-color: #000000;
-    border-radius: 0.5rem;  
-    border: 1px solid #000000; 
+    border-radius: 0.5rem;
+    border: 1px solid #000000;
+}
+.more {
+    width: 2rem;
+}
+.hh {
+    padding: 0 5rem;
+    display: flex;
+    justify-content: center;
+    margin: 2rem auto;
+     @media only screen and(min-width: 992px){
+        justify-content: space-between;    
+    }
+
+    input{
+        height: 2rem;
+        width: 15rem;
+        border: none;
+        border-radius: 0.5rem;
+        display: none;
+        @media only screen and(min-width: 992px){
+          display: block;
+        }
+        
+    }
+button {
+    width: 15rem;
+    height: 2rem;
+    font-size: 14px;
+    align-items: center;
+    border: none;
+    border-radius: 0.5rem;
+    color: white;
+    background-color: #111827;
+}
+}
+.demende {
+    width: 25em;
+    height: 2rem;
+    border-radius: 0.5rem;
+    font-size: 14px;
+    align-items: center;
+    border: none;
+    color: white;
+    background-color: #111827;
+    margin: 2rem auto;   
+}
+
+.modal-content{
+    background-color: #D1D5DB;
+    height: 30rem;
+}
+.modal-body input{
+  width: 100%;
+}
+.modal-title{
+    color: #000000;
+}
+
+.modal-body input{
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: #d1d5db 1px solid;
+}
+.modal-footer{
+
+  :hover{
+    color: #d1d5db;
+  }
+  
+  input{
+    color: #d1d5db;
+    background-color: #000000;
+    border-radius: 0.5rem;
+    border: #000000 1px solid;
+  }
 }
 </style>

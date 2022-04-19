@@ -8,7 +8,9 @@ class UsersController extends Controller
 {
     public function getuser()
     {
-        return User :: all();
+        //  select specific columns
+        $users = User::select('id', 'email', 'password')->get();
+        return $users;
     }
     public function addUser(Request $request)
     {

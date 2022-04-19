@@ -14,6 +14,8 @@ use App\Http\Controllers\OffreController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+// Route::resource('Offre', OffreController::class);
+
 
 Route::post('/register', [UsersController::class, 'addUser']);
 Route::get('/users', [UsersController::class, 'getuser']);
@@ -22,4 +24,6 @@ Route::get('/users', [UsersController::class, 'getuser']);
 
 Route::post('/AddOffre', [OffreController::class, 'addOffre']);
 Route::get('/GetOffre', [OffreController::class, 'getOffre']);
+Route::put('/UpdateOffre/{id}', [OffreController::class, 'updateOffre']);
+Route::delete('/DeleteOffre/{id}', [OffreController::class, 'deleteOffre']);
 
