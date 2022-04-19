@@ -71,74 +71,7 @@ export default {
         Nav,
         Footer,
     },
-    data() {
-        return {
-            form: { date: "", creneau: "", sujet: "", client_Id: client_Id },
-            lists: [],
-            id: null,
-            times: [
-                { date: "10 h à 10:30h" },
-                { date: "11 h à 11:30h" },
-                { date: "14 h à 14:30h" },
-                { date: "15 h à 15:30h" },
-                { date: "16 h à 16:30h" },
-            ],
-            time_creneau: [],
-        };
-    },
-    methods: {
-        filter_ceeneau() {},
-
-        Get_rdv() {
-            this.id = Cookies.get("id");
-            // console.log(this.id);
-            fetch(
-                `http://localhost/gestion-rndv/back-end/controllers/C-lire_rdv.php?id=${this.id}`
-            )
-                .then((res) => res.json())
-                .then((data) => {
-                    this.lists = data;
-                });
-        },
-        Reserve() {
-            fetch(
-                `http://localhost/gestion-rndv/back-end/controllers/C-creer_rdv.php`,
-                {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(this.form),
-                }
-            ).then((res) => res.json());
-        },
-        Delete(id) {
-            fetch(
-                `http://localhost/gestion-rndv/back-end/controllers/C-supprimer_rdv.php`,
-                {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ id: id }),
-                }
-            ).then((res) => res.json());
-        },
-        async Get_date_rdv() {
-            let date = this.form.date;
-            const res = await fetch(
-                `http://localhost/gestion-rndv/back-end/controllers/C-lire_time_rdv.php?date=${date}`
-            );
-            const result = await res.json();
-            if (result != "errore") {
-                this.time_creneau = result.map((r) => r.creneau);
-                this.times = this.times.filter(
-                    (i) => !this.time_creneau.includes(i.date)
-                );
-            }
-        },
-    },
-    mounted() {
-        this.Get_rdv();
-        this.Get_date_rdv();
-    },
-};
+}
 </script>
 
 <style lang="scss" scoped>

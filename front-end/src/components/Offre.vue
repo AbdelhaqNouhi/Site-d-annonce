@@ -1,9 +1,13 @@
 <template>
     <div>
-        <div class="container hh">
+        <div class="container col-9 hh">
             <div>
                 <input type="text" placeholder="Search">
             </div>
+            <div>
+                <button data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add Offre</button>
+            </div>
+           
             
         </div>
         <div class="container col-12 col-lg-8 post">
@@ -75,7 +79,28 @@
                 </div>
             </div>
         </div>
-        
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                    <h2 class="modal-title" id="staticBackdropLabel">Add Post</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" name="title" placeholder="title">
+                </div>
+                <div class="modal-body">
+                    <input type="text" name="description" placeholder="description">
+                </div>
+                <div class="modal-body">
+                    <input type="text" name="url" placeholder="URL:">
+                </div>
+                <div class="modal-footer">
+                    <input class="btn w-100" type="Submit" name="Goo" value="Goo">
+                </div>
+            </div>
+            </div>
+            </div>
     <Footer />
 </div>
 </template>
@@ -84,7 +109,6 @@
 import Cookies from "js-cookie";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
-
 const client_Id = Cookies.get("id");
 export default {
     name: "Offre",
@@ -92,74 +116,7 @@ export default {
         Nav,
         Footer,
     },
-    data() {
-        return {
-            form: { date: "", creneau: "", sujet: "", client_Id: client_Id },
-            lists: [],
-            id: null,
-            times: [
-                { date: "10 h à 10:30h" },
-                { date: "11 h à 11:30h" },
-                { date: "14 h à 14:30h" },
-                { date: "15 h à 15:30h" },
-                { date: "16 h à 16:30h" },
-            ],
-            time_creneau: [],
-        };
-    },
-    methods: {
-        filter_ceeneau() {},
-
-        Get_rdv() {
-            this.id = Cookies.get("id");
-            // console.log(this.id);
-            fetch(
-                `http://localhost/gestion-rndv/back-end/controllers/C-lire_rdv.php?id=${this.id}`
-            )
-                .then((res) => res.json())
-                .then((data) => {
-                    this.lists = data;
-                });
-        },
-        Reserve() {
-            fetch(
-                `http://localhost/gestion-rndv/back-end/controllers/C-creer_rdv.php`,
-                {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(this.form),
-                }
-            ).then((res) => res.json());
-        },
-        Delete(id) {
-            fetch(
-                `http://localhost/gestion-rndv/back-end/controllers/C-supprimer_rdv.php`,
-                {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ id: id }),
-                }
-            ).then((res) => res.json());
-        },
-        async Get_date_rdv() {
-            let date = this.form.date;
-            const res = await fetch(
-                `http://localhost/gestion-rndv/back-end/controllers/C-lire_time_rdv.php?date=${date}`
-            );
-            const result = await res.json();
-            if (result != "errore") {
-                this.time_creneau = result.map((r) => r.creneau);
-                this.times = this.times.filter(
-                    (i) => !this.time_creneau.includes(i.date)
-                );
-            }
-        },
-    },
-    mounted() {
-        this.Get_rdv();
-        this.Get_date_rdv();
-    },
-};
+}; 
 </script>
 
 <style lang="scss" scoped>
@@ -172,13 +129,11 @@ export default {
     background-color: #d1d5db;
     border-radius: 0.5rem;
     margin: 82px auto;
-
      @media only screen and(min-width: 992px){
         display: flex;
         justify-content: center;
         flex-direction: row;
     }
-
     img{
          border-radius: 0.5rem;
     }
@@ -187,7 +142,6 @@ export default {
     display: flex;
     align-items: center;
     gap: 1rem;
-
     form{
         margin-left: auto;
     }
@@ -229,7 +183,6 @@ export default {
      @media only screen and(min-width: 992px){
         justify-content: space-between;    
     }
-
     input{
         height: 2rem;
         width: 15rem;
@@ -263,7 +216,6 @@ button {
     background-color: #111827;
     margin: 2rem auto;   
 }
-
 .modal-content{
     background-color: #D1D5DB;
     height: 30rem;
@@ -274,14 +226,12 @@ button {
 .modal-title{
     color: #000000;
 }
-
 .modal-body input{
   padding: 1rem;
   border-radius: 0.5rem;
   border: #d1d5db 1px solid;
 }
 .modal-footer{
-
   :hover{
     color: #d1d5db;
   }

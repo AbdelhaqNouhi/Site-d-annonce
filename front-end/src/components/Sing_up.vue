@@ -30,38 +30,6 @@ export default {
         Nav,
         Footer,
     },
-    data() {
-        return {
-            nom: "",
-            prenom: "",
-            email: "",
-            password: "",
-        };
-    },
-    methods: {
-    login(){
-        this.$router.replace("/");
-    },
-    register() {
-      if(this.nom != "" && this.prenom != "" && this.age != "" && this.profession != ""){
-        fetch("http://localhost/gestion-rndv/back-end/controllers/C-registerClient.php", {
-            method: "post",
-            headers: {
-                "Content-type": "application/json",
-            },
-            body: JSON.stringify({
-            
-            nom: this.nom,
-            prenom: this.prenom,
-            email: this.email,
-            password: this.password,
-            }),
-        })
-            .then((res) => res.json())
-            .then(()=>this.show = true)
-        }
-    },
-  },
 }
 </script>
 
