@@ -2,13 +2,13 @@
 <div>
     <div class="hh">
         <div class="col-11 col-lg-6 p-0 login">
-            <form>
-            <h1>Sing_in</h1>
+            <form @submit.prevent="login">
+                <h1>Sing_in</h1>
                 <label>E-mail</label>
                     <input type="text" name="email" placeholder="E-mail" v-model="email">
                 <label>Password</label>
-                    <input type="text" name="password" placeholder="Password" v-model="Password">
-                    <input class="botton" type="submit" name="reserve" value="Login" @click.prevent="login">        
+                    <input type="password" name="password" placeholder="Password" v-model="password">
+                    <input class="botton" type="submit" name="reserve" value="Login">        
             </form>
         </div>
     </div>
@@ -21,6 +21,8 @@ import { ref } from "vue";;
 import Cookies from 'js-cookie';
 import Footer from './Footer.vue';
 
+const UserId = Cookies.get('id');
+
 const header = {
     'content-type': 'application/json',
      'Access-Control-Allow-Methods': 'POST', 
@@ -30,22 +32,39 @@ const header = {
 
 export default {
     name: "Login",
-    inject:["setClientId"],
+    // inject:["setClientId"],
     components: {
         Footer,
     },
     data() {
         return {
             email: "",
-            password: "",
+            password: ""
         }
     },
     methods: {
         login() {
-            fetch('http://127.0.0.1:8000/api/users', {
+        console.log(this.data);
+            fetch(`http://localhost:8000/api/login`, {
                 method: 'POST',
-                headers: header,   
+                headers: header,
+
+                body: JSON.stringify({
+                    email: this.email,
+                    password: this.password,
+                })
             })
+            .then((res) => res.json())
+            .then((log) => {
+                if ((this.email == log.email) && (this.password == log.password)) {
+                    Cookies.set('id', log.id);
+                    console.log((log.id));
+                    this.$router.push('/Offre');
+                } else {
+                    console.log("error");
+                }
+            });
+
         }
     }
 };
@@ -71,6 +90,7 @@ form{
     background-color: #D1D5DB;
 }
     input{
+        color: #000000;
         border-radius: 0.5rem;
         border: none;
         width: 100%;

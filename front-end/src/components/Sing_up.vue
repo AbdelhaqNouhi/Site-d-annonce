@@ -25,6 +25,7 @@
 import Nav from "../components/Nav";
 import Footer from './Footer.vue';
   
+const UserId = Cookies.get('id');
 const header = {
     'content-type': 'application/json',
      'Access-Control-Allow-Methods': 'POST', 
@@ -44,6 +45,7 @@ export default {
             prenom: "",
             email: "",
             password: "",
+            id: UserId,
         }
     },
     methods: {

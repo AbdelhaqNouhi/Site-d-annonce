@@ -1,7 +1,6 @@
 <?php
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-// use app\controllers\UsersController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\OffreController;
 /*
@@ -20,7 +19,7 @@ use App\Http\Controllers\OffreController;
 if(Route::post('/register', [UsersController::class, 'addUser'])){
     echo "User created";
 };
-Route::get('/users', [UsersController::class, 'getuser']);
+Route::post('/login', [UsersController::class, 'login']);
 
 
 
