@@ -56,7 +56,7 @@ export default {
             if (data!=false) {
                 this.setUser_id(data.id);
                 Cookies.set('id', data.id);
-                this.$router.push('/Offer')
+                this.$router.push('/Offre')
                 console.log(data.id);
             }else{
                 alert("Login failed");

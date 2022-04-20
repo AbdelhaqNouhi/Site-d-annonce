@@ -58,7 +58,11 @@ export default {
                     password: this.password,
                 }),
             }).then((res) => res.json())
-                console.log(this.nom, this.prenome, this.email, this.password);
+                if (res){
+                    this.router.push('/');
+                }else{
+                    alert("erreur");
+                }
         }
     }
 }

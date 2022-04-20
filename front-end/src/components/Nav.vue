@@ -7,18 +7,15 @@
                 </svg>
             </div>
             <div>
-                <router-link class="col-2" v-if="!clientId" to="/">Home</router-link>
-            </div>
-            <div>
-                <router-link v-if="!clientId" to="Offre">Offre</router-link>
+                <router-link v-if="User_id" to="Offre">Offre</router-link>
             </div>
             <div class="col-3 col-lg-4">
-                <router-link v-if="!clientId" to="Demande">Demande</router-link>
+                <router-link v-if="User_id" to="Demande">Demande</router-link>
             </div>
 
-                <router-link to="Login" v-if="!clientId"><button>login</button></router-link>
-                <router-link to="Sing_up" v-if="!clientId"><button>Regester</button></router-link>
-                <button @click="logout" v-if="clientId" >logout</button>
+                <router-link to="Login" v-if="!User_id"><button>login</button></router-link>
+                <router-link to="Sing_up" v-if="!User_id"><button>Regester</button></router-link>
+                <button @click="logout" v-if="User_id" >logout</button>
         </div>
     </nav>
 </template>
@@ -27,16 +24,16 @@
 import Cookies from "js-cookie";
 export default {
     name: "Nav",
-    inject:["clientId","setClientId"],
+    inject:["User_id","setUser_id"],
     data(){
         return {
-            clientId: this.clientId
+            User_id: this.User_id,
         }
     },
     methods:{
         logout(){
             Cookies.remove("id");
-            this.setClientId("");
+            this.setUser_id(null);
             this.$router.replace("/")
         }
     },

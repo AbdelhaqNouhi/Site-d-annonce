@@ -8,71 +8,143 @@
                 <button data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add Offre</button>
             </div>   
         </div>
-        <div class="container col-12 col-lg-8 post">
-            <div class="col-12 col-lg-7">
-                <img
-                    src="https://images.pexels.com/photos/302743/pexels-photo-302743.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                    class="w-100 P-0 img-post"
-                    alt="..."
-                />
-            </div>
-            <div class="col-12 col-lg-5">
-                <div class="user">
-                    <div class="media m-0">
-                        <img
-                            src="https://images.pexels.com/photos/302743/pexels-photo-302743.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                            class="rounded-circle"
-                            alt=""
-                        />
-                    </div>
-                    <div class="text">
-                        <div class="media-body m-0">hhhhhhhhhh</div>
-                        <div class="text-muted small">gggggggggg</div>
-                    </div>
-
-                    <form>
-                        <div class="more">
-                            <a data-bs-toggle="dropdown"
-                                ><svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="bi bi-three-dots point"
-                                    viewBox="0 0 16 16"
-                                >
-                                    <path
-                                        d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
-                                    /></svg
-                            ></a>
-
-                            <ul class="dropdown-menu">
-                                <input
-                                    class="dropdown-item"
-                                    type="submit"
-                                    name="delete"
-                                    value="Delete"
-                                />
-                                <input
-                                    type="submit"
-                                    class="dropdown-item"
-                                    name="edit"
-                                    value="Update"
-                                />
-                            </ul>
-                        </div>
-                    </form>
+        <form >
+            <div class="container col-12 col-lg-8 post">
+                <div class="col-12 col-lg-7">
+                    <img
+                        src="https://images.pexels.com/photos/302743/pexels-photo-302743.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                        class="w-100 P-0 img-post"
+                        alt="..."
+                    />
                 </div>
+                <div class="col-12 col-lg-5">
+                    <div class="user">
+                        <div class="media m-0">
+                            <img
+                                src="https://images.pexels.com/photos/302743/pexels-photo-302743.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                                class="rounded-circle"
+                                alt=""
+                            />
+                        </div>
+                        <div class="text">
+                            <div class="media-body m-0">hhhhhhhhhh</div>
+                            <div class="text-muted small">gggggggggg</div>
+                        </div>
 
-                <div class="text mt-5">
-                    <div class="titel">
-                        <h4>Lorem ipsum dolor</h4>
+                        <form>
+                            <div class="more">
+                                <a data-bs-toggle="dropdown"
+                                    ><svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="bi bi-three-dots point"
+                                        viewBox="0 0 16 16"
+                                    >
+                                        <path
+                                            d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                                        /></svg
+                                ></a>
+
+                                <ul class="dropdown-menu">
+                                    <input
+                                        class="dropdown-item"
+                                        type="submit"
+                                        name="delete"
+                                        value="Delete"
+                                    />
+                                    <input
+                                        type="submit"
+                                        class="dropdown-item"
+                                        name="edit"
+                                        value="Update"
+                                    />
+                                </ul>
+                            </div>
+                        </form>
                     </div>
-                    <div>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur quisquam ipsum laboriosam earum consequatur facere dolorum quis, architecto exercitationem nostrum nisi</p>
+
+                    <div class="text mt-5">
+                        <div class="titel">
+                            <h4>Lorem ipsum dolor</h4>
+                        </div>
+                        <div>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur quisquam ipsum laboriosam earum consequatur facere dolorum quis, architecto exercitationem nostrum nisi</p>
+                        </div>
+                        <div>
+                            <h5 class="font-weight-bold">Prix: 299 $</h5>
+                        </div>
+                        <div>
+                            <button class="demende">Demende Now</button>
+                        </div>
                     </div>
-                    <div>
-                        <h5 class="font-weight-bold">Prix: 299 $</h5>
+                </div>
+            </div>
+        </form>
+
+         ------------------------------------------------------------
+
+        <div v-for="post in posts">
+            <div class="container col-12 col-lg-8 post">
+                <div class="col-12 col-lg-7">
+                    <img
+                        :src="post.image"
+                        class="w-100 P-0 img-post"
+                        alt="..."
+                    />
+                </div>
+                <div class="col-12 col-lg-5">
+                    <div class="user">
+                        <div class="media m-0">
+                            <img
+                                src="https://images.pexels.com/photos/302743/pexels-photo-302743.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                                class="rounded-circle"
+                                alt=""
+                            />
+                        </div>
+                        <div class="text">
+                            <div class="media-body m-0">hhhhhhhhhh</div>
+                            <div class="text-muted small">{{ post.created_at }}</div>
+                        </div>
+
+                    
+                            <div class="more">
+                                <a data-bs-toggle="dropdown"
+                                    ><svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="bi bi-three-dots point"
+                                        viewBox="0 0 16 16"
+                                    >
+                                        <path
+                                            d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                                        /></svg
+                                ></a>
+
+                                <ul class="dropdown-menu">
+                                    <button
+                                        class="dropdown-item"
+                                        name="delete"
+                                        @click="DeletOffre(post.id)"
+                                    >Delete</button>
+                                    <button
+                                        class="dropdown-item"
+                                        name="edit"
+                                    >Update</button>
+                                </ul>
+                            </div>
                     </div>
-                    <div>
-                        <button class="demende">Demende Now</button>
+
+                    <div class="text mt-5">
+                        <div class="titel">
+                            <h4>{{ post.title}}</h4>
+                        </div>
+                        <div>
+                            <p>{{ post.descriptions }}</p>
+                        </div>
+                        <div>
+                            <h5 class="font-weight-bold">{{ post.prix }}</h5>
+                        </div>
+                        <div>
+                            <button class="demende">Demende Now</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -87,16 +159,57 @@ import Cookies from "js-cookie";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import Add from "../components/Add";
-const client_Id = Cookies.get("id");
+import { computed } from "vue";
+
+const header = {
+    'content-type': 'application/json',
+     'Access-Control-Allow-Methods': '*', 
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type', 
+};
+
 export default {
     name: "Offre",
     components: {
     Nav,
     Footer,
-    Add,
     Add
 },
-}; 
+    data () {
+        return {
+            posts: [],
+        }
+    },
+
+    methods: {
+        async GetOffre() {
+            const res = await fetch ('http://localhost:8000/api/GetOffre', {
+                method: 'GET',
+                headers: header,
+            });
+            const data = await res.json();
+            if(data){
+                console.log(data);
+                this.posts = data;
+            }
+            else{
+                alert("please create an Offre");
+            }
+        },
+        
+        async DeletOffre(id) {
+            console.log(id);
+            const res = await fetch ('http://localhost:8000/api/DeleteOffre/'+id, {
+                method: 'DELETE',
+                headers: header,
+            });
+        }
+    },
+
+    mounted () {
+        this.GetOffre();
+    },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -176,7 +289,7 @@ export default {
     }
 button {
     width: 15rem;
-    height: 2rem;
+    height: 2.5rem;
     font-size: 14px;
     align-items: center;
     border: none;

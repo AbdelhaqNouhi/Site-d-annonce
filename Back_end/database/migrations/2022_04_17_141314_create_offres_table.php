@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('type');
             $table->string('descriptions');
             $table->string('image');
-            $table->float('prix');
+            $table->string('prix');
             $table->foreignId('user_id');
             $table-> foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
