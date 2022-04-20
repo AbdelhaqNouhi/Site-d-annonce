@@ -11,21 +11,21 @@ import Cookies from "js-cookie";
 export default{
     data(){
         return {
-            clientId:""
+            User_id:""
         }
     },
     provide(){
         return {
-            clientId: computed(() => this.clientId),
-            setClientId: this.setClientId
+            User_id: computed(() => this.User_id),
+            setUser_id: this.setUser_id
         }
     },
     mounted(){
-        this.clientId = Cookies.get("id")
+        this.User_id = Cookies.get("id")
     },
     methods:{
-        setClientId(id){
-            this.clientId = id;
+        setUser_id(id){
+            this.User_id = id;
         }
     },
     components:{

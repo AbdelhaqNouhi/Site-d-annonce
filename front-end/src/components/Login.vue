@@ -5,9 +5,9 @@
             <form @submit.prevent="login">
                 <h1>Sing_in</h1>
                 <label>E-mail</label>
-                    <input type="text" name="email" placeholder="E-mail" v-model="email">
+                    <input type="text" name="email" placeholder="E-mail" required v-model="email">
                 <label>Password</label>
-                    <input type="password" name="password" placeholder="Password" v-model="password">
+                    <input type="password" name="password" placeholder="Password" required v-model="password">
                     <input class="botton" type="submit" name="reserve" value="Login">        
             </form>
         </div>
@@ -32,41 +32,38 @@ const header = {
 
 export default {
     name: "Login",
-    // inject:["setClientId"],
+    inject:["setUser_id"],
     components: {
         Footer,
     },
     data() {
         return {
             email: "",
-            password: ""
+            password: "",
         }
     },
     methods: {
-        login() {
-        console.log(this.data);
-            fetch(`http://localhost:8000/api/login`, {
+        async login() {
+            const res = await fetch('http://localhost:8000/api/login', {
                 method: 'POST',
                 headers: header,
-
-                body: JSON.stringify({
+                body : JSON.stringify({
                     email: this.email,
                     password: this.password,
-                })
-            })
-            .then((res) => res.json())
-            .then((log) => {
-                if ((this.email == log.email) && (this.password == log.password)) {
-                    Cookies.set('id', log.id);
-                    console.log((log.id));
-                    this.$router.push('/Offre');
-                } else {
-                    console.log("error");
-                }
+                }),
             });
-
+            const data = await res.json();
+            if (data!=false) {
+                this.setUser_id(data.id);
+                Cookies.set('id', data.id);
+                this.$router.push('/Offer')
+                console.log(data.id);
+            }else{
+                alert("Login failed");
+            }
+           
         }
-    }
+    },
 };
 </script>
 

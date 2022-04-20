@@ -16,15 +16,17 @@ class UsersController extends Controller
         ]);
         $User = User::where('email', $login['email'])->first();
 
-        if(!$User || !hash::check($login['password'], $User->password)){
-            return response([
-                'message' => 'password incorect'
-            ]);
-        }else{
-            return $User;
-        };
+        if($User){
+            if(hash::check($login['password'], $User->password)){
+                return $User;
+            }
+            else{
+                echo json_encode(false);
+
+            }
+        }
     }
-    
+
     public function addUser(Request $request)
     {
         $add = $request->validate([

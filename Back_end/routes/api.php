@@ -16,9 +16,8 @@ use App\Http\Controllers\OffreController;
 // Route::resource('Offre', OffreController::class);
 
 
-if(Route::post('/register', [UsersController::class, 'addUser'])){
-    echo "User created";
-};
+Route::post('/register', [UsersController::class, 'addUser']);
+
 Route::post('/login', [UsersController::class, 'login']);
 
 
