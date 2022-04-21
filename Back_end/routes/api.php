@@ -1,8 +1,10 @@
 <?php
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\OffreController;
+use App\Http\Controllers\DemandeController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,13 +19,18 @@ use App\Http\Controllers\OffreController;
 
 
 Route::post('/register', [UsersController::class, 'addUser']);
-
 Route::post('/login', [UsersController::class, 'login']);
 
 
 
-Route::post('/AddOffre', [OffreController::class, 'addOffre']);
 Route::get('/GetOffre', [OffreController::class, 'getOffre']);
+Route::post('/AddOffre', [OffreController::class, 'addOffre']);
 Route::put('/UpdateOffre/{id}', [OffreController::class, 'updateOffre']);
 Route::delete('/DeleteOffre/{id}', [OffreController::class, 'deleteOffre']);
+
+
+Route::get('/GetDemande', [DemandeController::class, 'GetDemande']);
+Route::post('/AddDemande', [DemandeController::class, 'AddDemande']);
+Route::put('/UpdateDemande/{id}', [DemandeController::class, 'UpdateDemande']);
+Route::delete('/DeleteDemande/{id}', [DemandeController::class, 'DeleteDemande']);
 

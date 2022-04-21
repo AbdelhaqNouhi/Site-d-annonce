@@ -1,27 +1,24 @@
 <template>
 <div>
-    <form>
+    <form @submit.prevent="AddDemande">
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                    <h2 class="modal-title" id="staticBackdropLabel">Update Post</h2>
-                    <button @click="kell=false" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h2 class= "modal-title" id="staticBackdropLabel">Add Demande</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <input type="text" name="title" placeholder="title">
+                    <input type="text" name="title" placeholder="title" v-model="form.title">
                 </div>
                 <div class="modal-body">
-                    <input type="text" name="type" placeholder="type">
+                    <input type="text" name="type" placeholder="type" v-model="form.type">
                 </div>
                 <div class="modal-body">
-                    <input type="text" name="description" placeholder="description">
+                    <input type="text" name="description" placeholder="description" v-model="form.descriptions">
                 </div>
                 <div class="modal-body">
-                    <input type="text" name="url" placeholder="URL:">
-                </div>
-                <div class="modal-body">
-                    <input type="text" name="prix" placeholder="prix">
+                    <input type="text" name="url" placeholder="URL:" v-model="form.image">
                 </div>
                 <div class="modal-footer">
                     <input class="btn w-100" type="Submit" name="Goo" value="Goo">
@@ -45,14 +42,30 @@ const header = {
 
 const User_id = Cookies.get("id");
     export default {
-        name: "UpdateOffre",
+        name: "Add",
 
-        data() {
+         data () {
             return {
-                kell: false,
-            };
+                form: {title: "", type: "", descriptions: "", image: "", user_id: User_id},
+            }
         },
-    };
+         methods: {
+            async AddDemande() {
+                console.log(User_id);
+                const res = await fetch ('http://localhost:8000/api/AddDemande', {
+                    method: 'POST',
+                    headers: header,
+                    body: JSON.stringify(this.form),
+                });
+                const data = await res.json();
+                if(data){
+                    console.log("success");
+                }else{
+                    console.log("error");
+                }
+            }
+        },
+    }
 </script>
 
 <style lang="scss" scop>
