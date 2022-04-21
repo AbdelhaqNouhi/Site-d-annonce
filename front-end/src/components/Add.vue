@@ -6,7 +6,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                     <h2 class="modal-title" id="staticBackdropLabel">Add Post</h2>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button @click="kell=false" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <input type="text" name="title" placeholder="title" v-model="form.title">
@@ -51,6 +51,7 @@ const User_id = Cookies.get("id");
             return {
                 form: {title: "", type: "", descriptions: "", image: "", prix: "", user_id: User_id},
                 posts: [],
+                kill: true,
             }
         },
          methods: {

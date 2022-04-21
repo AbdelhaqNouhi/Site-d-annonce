@@ -5,7 +5,7 @@
                 <input type="text" placeholder="Search">
             </div>
             <div>
-                <button data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add Offre</button>
+                <button @click="ad=true" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add Offre</button>
             </div>   
         </div>
         <form >
@@ -52,6 +52,7 @@
                                         value="Delete"
                                     />
                                     <input
+                                        data-bs-toggle="modal" data-bs-target="#staticBackdrop"
                                         type="submit"
                                         class="dropdown-item"
                                         name="edit"
@@ -119,15 +120,8 @@
                                 ></a>
 
                                 <ul class="dropdown-menu">
-                                    <button
-                                        class="dropdown-item"
-                                        name="delete"
-                                        @click="DeletOffre(post.id)"
-                                    >Delete</button>
-                                    <button
-                                        class="dropdown-item"
-                                        name="edit"
-                                    >Update</button>
+                                    <button class="dropdown-item" name="delete" @click="DeletOffre(post.id)">Delete</button>
+                                    <button @click="up=true" class="dropdown-item" name="update" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Update</button>
                                 </ul>
                             </div>
                     </div>
@@ -150,16 +144,18 @@
             </div>
         </div>
     <Footer />
-    <Add />
+    <Add v-if="ad"/>
+    <UpdateOffre v-if="up"/>
 </div>
 </template>
 
 <script>
+import { computed } from "vue";
 import Cookies from "js-cookie";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import Add from "../components/Add";
-import { computed } from "vue";
+import UpdateOffre from "../components/UpdateOffre";
 
 const header = {
     'content-type': 'application/json',
@@ -173,11 +169,15 @@ export default {
     components: {
     Nav,
     Footer,
-    Add
+    Add,
+    UpdateOffre
 },
+
     data () {
         return {
             posts: [],
+            up: false,
+            ad: false,
         }
     },
 
