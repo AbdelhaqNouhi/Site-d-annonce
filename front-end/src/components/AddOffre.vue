@@ -46,7 +46,6 @@ const header = {
 const User_id = Cookies.get("id");
     export default {
         name: "Add",
-
          data () {
             return {
                 form: {title: "", type: "", descriptions: "", image: "", prix: "", user_id: User_id},

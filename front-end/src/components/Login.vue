@@ -21,7 +21,6 @@ import { ref } from "vue";;
 import Cookies from 'js-cookie';
 import Footer from './Footer.vue';
 
-const UserId = Cookies.get('id');
 
 const header = {
     'content-type': 'application/json',

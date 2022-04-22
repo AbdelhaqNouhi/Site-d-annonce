@@ -11,77 +11,6 @@
                 <button data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add Demande</button>
             </div>   
         </div>
-        <form >
-            <div class="container col-12 col-lg-8 post">
-                <div class="col-12 col-lg-7">
-                    <img
-                        src="https://images.pexels.com/photos/302743/pexels-photo-302743.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                        class="w-100 P-0 img-post"
-                        alt="..."
-                    />
-                </div>
-                <div class="col-12 col-lg-5">
-                    <div class="user">
-                        <div class="media m-0">
-                            <img
-                                src="https://images.pexels.com/photos/302743/pexels-photo-302743.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                                class="rounded-circle"
-                                alt=""
-                            />
-                        </div>
-                        <div class="text">
-                            <div class="media-body m-0">hhhhhhhhhh</div>
-                            <div class="text-muted small">gggggggggg</div>
-                        </div>
-
-                        <form>
-                            <div class="more">
-                                <a data-bs-toggle="dropdown"
-                                    ><svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="bi bi-three-dots point"
-                                        viewBox="0 0 16 16"
-                                    >
-                                        <path
-                                            d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
-                                        /></svg
-                                ></a>
-
-                                <ul class="dropdown-menu">
-                                    <input
-                                        class="dropdown-item"
-                                        type="submit"
-                                        name="delete"
-                                        value="Delete"
-                                    />
-                                    <input
-                                        data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                                        type="submit"
-                                        class="dropdown-item"
-                                        name="edit"
-                                        value="Update"
-                                    />
-                                </ul>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="text mt-5">
-                        <div class="titel">
-                            <h4>Lorem ipsum dolor</h4>
-                        </div>
-                        <div>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur quisquam ipsum laboriosam earum consequatur facere dolorum quis, architecto exercitationem nostrum nisi</p>
-                        </div>
-                        <div>
-                            <h5 class="font-weight-bold">Prix: 299 $</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-
-         ------------------------------------------------------------
 
         <div v-for="post in posts">
             <div class="container col-12 col-lg-8 post">
@@ -107,7 +36,7 @@
                         </div>
 
                     
-                            <div class="more">
+                            <div v-if="user_id == post.user_id" class="more">
                                 <a data-bs-toggle="dropdown"
                                     ><svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -121,7 +50,7 @@
 
                                 <ul class="dropdown-menu">
                                     <button class="dropdown-item" name="delete" @click="DeletOffre(post.id)">Delete</button>
-                                    <button class="dropdown-item" name="update" data-bs-toggle="modals" data-bs-target="#staticBackdrop">Update</button>
+                                    <button @click="GetOneDemande(post.id)" class="dropdown-item" name="update" data-bs-toggle="modal" data-bs-target="#staticBackdrops">Update</button>
                                 </ul>
                             </div>
                     </div>
@@ -137,8 +66,8 @@
                 </div>
             </div>
         </div>
-        <form>
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel">
+        <form @submit.prevent>
+            <div class="modal fade" id="staticBackdrops" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -146,19 +75,19 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                     <div class="modal-body">
-                        <input type="text" name="title" placeholder="title" value="">
+                        <input type="text" name="title" placeholder="title" v-model="update.title">
                     </div>
                     <div class="modal-body">
-                        <input type="text" name="type" placeholder="type" value="">
+                        <input type="text" name="type" placeholder="type" v-model="update.type">
                     </div>
                     <div class="modal-body">
-                        <input type="text" name="description" placeholder="description" value="">
+                        <input type="text" name="description" placeholder="descriptions" v-model="update.descriptions">
                     </div>
                     <div class="modal-body">
-                        <input type="text" name="url" placeholder="URL:" value="">
+                        <input type="text" name="url" placeholder="URL:" v-model="update.image">
                     </div>
                     <div class="modal-footer">
-                        <input class="btn w-100" type="Submit" name="Goo" value="Goo">
+                        <input @click="UpdateDemande(update.id)"  class="btn w-100" type="Submit" name="Goo" value="Goo" data-bs-dismiss="modal">
                     </div>
             </div>
             </div>
@@ -195,18 +124,19 @@ export default {
         return {
             posts: [],
             update: [],
+            user_id: Cookies.get("id"),
+            post_id: ""
         }
     },
 
     methods: {
-        async GetOffre() {
+        async GetDemande() {
             const res = await fetch ('http://localhost:8000/api/GetDemande', {
                 method: 'GET',
                 headers: header,
             });
             const data = await res.json();
             if(data){
-                console.log(data);
                 this.posts = data;
             }
             else{
@@ -229,6 +159,23 @@ export default {
                 alert("please create an Offre");
             }
         },
+
+        async UpdateDemande(id) {
+            console.log(id+"hh");
+            const res = await fetch ('http://localhost:8000/api/UpdateDemande/'+id, {
+                method: 'POST',
+                headers: header,
+                body: JSON.stringify(this.update),
+            });
+            const data = await res.json();
+            if(data){
+                this.posts = data;
+                this.GetDemande();
+            }
+            else{
+                alert("please create an Offre");
+            }
+        },
         
         async DeletOffre(id) {
             console.log(id);
@@ -236,11 +183,12 @@ export default {
                 method: 'DELETE',
                 headers: header,
             });
+            this.GetDemande();
         }
     },
 
     mounted () {
-        this.GetOffre();
+        this.GetDemande();
     },
 };
 </script>

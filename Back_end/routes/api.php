@@ -26,13 +26,13 @@ Route::post('/login', [UsersController::class, 'login']);
 Route::get('/GetOffre', [OffreController::class, 'getOffre']);
 Route::post('/AddOffre', [OffreController::class, 'addOffre']);
 Route::get('/GetOneOffre/{id}', [OffreController::class, 'getOneOffre']);
-Route::put('/UpdateOffre/{id}', [OffreController::class, 'updateOffre']);
+Route::post('/UpdateOffre/{id}', [OffreController::class, 'updateOffre']);
 Route::delete('/DeleteOffre/{id}', [OffreController::class, 'deleteOffre']);
 
 
 Route::get('/GetDemande', [DemandeController::class, 'GetDemande']);
 Route::post('/AddDemande', [DemandeController::class, 'AddDemande']);
-Route::get('/GetOneDemande/{id}', [OffreController::class, 'getOneDemande']);
-Route::put('/UpdateDemande/{id}', [DemandeController::class, 'UpdateDemande']);
+Route::get('/GetOneDemande/{id}', [DemandeController::class, 'GetOneDemande']);
+Route::post('/UpdateDemande/{id}', [DemandeController::class, 'UpdateDemande']);
 Route::delete('/DeleteDemande/{id}', [DemandeController::class, 'DeleteDemande']);
 

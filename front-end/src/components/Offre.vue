@@ -35,7 +35,7 @@
                         </div>
 
                     
-                            <div class="more">
+                            <div v-if="user_id == post.user_id" class="more">
                                 <a data-bs-toggle="dropdown"
                                     ><svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -71,12 +71,12 @@
                 </div>
             </div>
         </div>
-        <form  @click="UpdateOffre(post.id)">
+        <form @submit.prevent>
         <div  class="modal fade" id="staticBackdrops" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                    <h2 class="modal-title" id="staticBackdropLabel">Update Post</h2>
+                    <h2 class="modal-title" id="staticBackdropLabel">Update Offre</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                     <div class="modal-body">
@@ -95,7 +95,7 @@
                         <input type="text" name="url" placeholder="URL:" v-model="update.prix">
                     </div>
                     <div class="modal-footer">
-                        <input class="btn w-100" type="Submit" name="Goo" value="Goo">
+                        <input @click="UpdateOffre(update.id)" class="btn w-100" type="Submit" name="Goo" value="Goo" data-bs-dismiss="modal">
                     </div>
             </div>
             </div>
@@ -113,6 +113,7 @@ import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import AddOffre from "../components/AddOffre";
 
+
 const header = {
     'content-type': 'application/json',
      'Access-Control-Allow-Methods': '*', 
@@ -122,6 +123,7 @@ const header = {
 
 export default {
     name: "Offre",
+    inject:["setUser_id"],
     components: {
     Nav,
     Footer,
@@ -132,6 +134,9 @@ export default {
         return {
             posts: [],
             update: [],
+            user_id: Cookies.get("id"),
+            post_id: "",
+
         }
     },
 
@@ -149,15 +154,7 @@ export default {
                 alert("please create an Offre");
             }
         },
-        
-        async DeletOffre(id) {
-            console.log(id);
-            const res = await fetch ('http://localhost:8000/api/DeleteOffre/'+id, {
-                method: 'DELETE',
-                headers: header,
-            });
-        },
-
+    
         async GetOneOffre(id) {
             console.log(id);
             const res = await fetch ('http://localhost:8000/api/GetOneOffre/'+id, {
@@ -174,21 +171,30 @@ export default {
         },
         
         async UpdateOffre(id) {
-            console.log(id);
+            console.log(id+"hh");
             const res = await fetch ('http://localhost:8000/api/UpdateOffre/'+id, {
-                method: 'PUT',
+                method: 'POST',
                 headers: header,
                 body: JSON.stringify(this.update),
             });
             const data = await res.json();
             if(data){
-            console.log(res);
-                
+                this.posts = data;
+                this.GetOffre();
             }
             else{
                 alert("please create an Offre");
             }
-        }
+        },
+
+         async DeletOffre(id) {
+            console.log(id);
+            const res = await fetch ('http://localhost:8000/api/DeleteOffre/'+id, {
+                method: 'DELETE',
+                headers: header,
+            });
+            this.GetOffre();
+        },
     },
 
     mounted () {

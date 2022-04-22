@@ -21,7 +21,7 @@
                     <input type="text" name="url" placeholder="URL:" v-model="form.image">
                 </div>
                 <div class="modal-footer">
-                    <input class="btn w-100" type="Submit" name="Goo" value="Goo">
+                    <input class="btn w-100" type="Submit" name="Goo" value="Goo" data-bs-dismiss="modal">
                 </div>
             </div>
             </div>
