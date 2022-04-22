@@ -14,11 +14,24 @@ class OffreController extends Controller
 
     public function addOffre(Request $request)
     {
+        $request->validate([
+            'title' => 'required',
+            'type' => 'required',
+            'descriptions' => 'required',
+            'image' => 'required',
+            'prix' => 'required',
+        ]);
+
         if(Offre::create($request -> all())){
             return "Offre created";
         }else{
             return "Offre not created";
         }
+    }
+
+    public function getOneOffre($id)
+    {
+        return Offre::find($id);
     }
 
     public function updateOffre(Request $request, $id)
@@ -42,4 +55,5 @@ class OffreController extends Controller
             return "Offre not deleted";
         }
     }
+
 }

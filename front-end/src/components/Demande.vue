@@ -121,7 +121,7 @@
 
                                 <ul class="dropdown-menu">
                                     <button class="dropdown-item" name="delete" @click="DeletOffre(post.id)">Delete</button>
-                                    <button class="dropdown-item" name="update" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Update</button>
+                                    <button class="dropdown-item" name="update" data-bs-toggle="modals" data-bs-target="#staticBackdrop">Update</button>
                                 </ul>
                             </div>
                     </div>
@@ -137,6 +137,33 @@
                 </div>
             </div>
         </div>
+        <form>
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                    <h2 class="modal-title" id="staticBackdropLabel">Update Demande</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                    <div class="modal-body">
+                        <input type="text" name="title" placeholder="title" value="">
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" name="type" placeholder="type" value="">
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" name="description" placeholder="description" value="">
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" name="url" placeholder="URL:" value="">
+                    </div>
+                    <div class="modal-footer">
+                        <input class="btn w-100" type="Submit" name="Goo" value="Goo">
+                    </div>
+            </div>
+            </div>
+            </div>
+        </form>
     <Footer />
     <AddDemande />
 </div>
@@ -167,6 +194,7 @@ export default {
     data () {
         return {
             posts: [],
+            update: [],
         }
     },
 
@@ -183,6 +211,22 @@ export default {
             }
             else{
                 alert("please create an Demande");
+            }
+        },
+
+        async GetOneDemande(id) {
+            console.log(id);
+            const res = await fetch ('http://localhost:8000/api/GetOneDemande/'+id, {
+                method: 'GET',
+                headers: header,
+            });
+            const data = await res.json();
+            if(data){
+                this.update = data;
+                console.log(data);
+            }
+            else{
+                alert("please create an Offre");
             }
         },
         

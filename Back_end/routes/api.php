@@ -15,7 +15,7 @@ use App\Http\Controllers\DemandeController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-// Route::resource('Offre', OffreController::class);
+Route::resource('Offre', OffreController::class);
 
 
 Route::post('/register', [UsersController::class, 'addUser']);
@@ -25,12 +25,14 @@ Route::post('/login', [UsersController::class, 'login']);
 
 Route::get('/GetOffre', [OffreController::class, 'getOffre']);
 Route::post('/AddOffre', [OffreController::class, 'addOffre']);
+Route::get('/GetOneOffre/{id}', [OffreController::class, 'getOneOffre']);
 Route::put('/UpdateOffre/{id}', [OffreController::class, 'updateOffre']);
 Route::delete('/DeleteOffre/{id}', [OffreController::class, 'deleteOffre']);
 
 
 Route::get('/GetDemande', [DemandeController::class, 'GetDemande']);
 Route::post('/AddDemande', [DemandeController::class, 'AddDemande']);
+Route::get('/GetOneDemande/{id}', [OffreController::class, 'getOneDemande']);
 Route::put('/UpdateDemande/{id}', [DemandeController::class, 'UpdateDemande']);
 Route::delete('/DeleteDemande/{id}', [DemandeController::class, 'DeleteDemande']);
 

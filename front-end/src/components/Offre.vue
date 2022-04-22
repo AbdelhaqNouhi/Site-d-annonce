@@ -49,7 +49,7 @@
 
                                 <ul class="dropdown-menu">
                                     <button class="dropdown-item" name="delete" @click="DeletOffre(post.id)">Delete</button>
-                                    <button @click="UpdateOffre(post.id)" class="dropdown-item" name="update" data-bs-toggle="modal" data-bs-target="#staticBackdrops">Update</button>
+                                    <button @click="GetOneOffre(post.id)" class="dropdown-item" name="update" data-bs-toggle="modal" data-bs-target="#staticBackdrops">Update</button>
                                 </ul>
                             </div>
                     </div>
@@ -71,29 +71,32 @@
                 </div>
             </div>
         </div>
-        <form @click="UpdateOffre">
-        <div v-for="post in posts"  class="modal fade" id="staticBackdrops" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel">
+        <form  @click="UpdateOffre(post.id)">
+        <div  class="modal fade" id="staticBackdrops" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                     <h2 class="modal-title" id="staticBackdropLabel">Update Post</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <input type="text" name="title" placeholder="title" value="{{ post.title }}">
-                </div>
-                <div class="modal-body">
-                    <input type="text" name="type" placeholder="type">
-                </div>
-                <div class="modal-body">
-                    <input type="text" name="description" placeholder="description">
-                </div>
-                <div class="modal-body">
-                    <input type="text" name="url" placeholder="URL:">
-                </div>
-                <div class="modal-footer">
-                    <input class="btn w-100" type="Submit" name="Goo" value="Goo">
-                </div>
+                    <div class="modal-body">
+                        <input type="text" name="title" placeholder="title" v-model="update.title">
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" name="type" placeholder="type" v-model="update.type">
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" name="description" placeholder="description" v-model="update.descriptions">
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" name="url" placeholder="URL:" v-model="update.image">
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" name="url" placeholder="URL:" v-model="update.prix">
+                    </div>
+                    <div class="modal-footer">
+                        <input class="btn w-100" type="Submit" name="Goo" value="Goo">
+                    </div>
             </div>
             </div>
             </div>
@@ -128,12 +131,12 @@ export default {
     data () {
         return {
             posts: [],
+            update: [],
         }
     },
 
     methods: {
         async GetOffre() {
-                console.log(this.posts);
             const res = await fetch ('http://localhost:8000/api/GetOffre', {
                 method: 'GET',
                 headers: header,
@@ -155,14 +158,36 @@ export default {
             });
         },
 
-        async UpdateOffre() {
-            const res = await fetch ('http://localhost:8000/api/UpdateOffre', {
-                method: 'PUT',
+        async GetOneOffre(id) {
+            console.log(id);
+            const res = await fetch ('http://localhost:8000/api/GetOneOffre/'+id, {
+                method: 'GET',
                 headers: header,
             });
             const data = await res.json();
-            console.log(data);
-            this.posts = data;
+            if(data){
+                this.update = data;
+            }
+            else{
+                alert("please create an Offre");
+            }
+        },
+        
+        async UpdateOffre(id) {
+            console.log(id);
+            const res = await fetch ('http://localhost:8000/api/UpdateOffre/'+id, {
+                method: 'PUT',
+                headers: header,
+                body: JSON.stringify(this.update),
+            });
+            const data = await res.json();
+            if(data){
+            console.log(res);
+                
+            }
+            else{
+                alert("please create an Offre");
+            }
         }
     },
 

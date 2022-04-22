@@ -24,7 +24,7 @@
                     <input type="text" name="prix" placeholder="prix" v-model="form.prix">
                 </div>
                 <div class="modal-footer">
-                    <input class="btn w-100" type="Submit" name="Goo" value="Goo">
+                    <input class="btn w-100" type="Submit" name="Goo" value="Goo" data-bs-dismiss="modal">
                 </div>
             </div>
             </div>
@@ -62,7 +62,7 @@ const User_id = Cookies.get("id");
                 });
                 const data = await res.json();
                 if(data){
-                    console.log("success");
+                    this.posts.push(data);
                 }else{
                     console.log("error");
                 }

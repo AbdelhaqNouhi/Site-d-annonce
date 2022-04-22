@@ -21,6 +21,11 @@ class DemandeController extends Controller
         }
     }
 
+    public function GetOneDemande ($id)
+    {
+        return Demande::find($id);
+    }
+
     public function UpdateDemande (Request $request, $id)
     {
         $Demande = Demande::find($id);
