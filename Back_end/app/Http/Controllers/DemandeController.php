@@ -9,7 +9,9 @@ class DemandeController extends Controller
 {
     public function GetDemande ()
     {
-        return Demande::all();
+        // return Demande::all();
+        return Demande::with('user')->get();
+
     }
 
     public function AddDemande (Request $request)

@@ -9,7 +9,8 @@ class OffreController extends Controller
 {
     public function getOffre()
     {
-        return Offre::all();
+        // return Offre::all();
+        return Offre::with('user')->get();
     }
 
     public function addOffre(Request $request)

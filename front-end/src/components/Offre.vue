@@ -30,7 +30,7 @@
                             />
                         </div>
                         <div class="text">
-                            <div class="media-body m-0">hhhhhhhhhh</div>
+                            <div class="media-body m-0">Abdelhaq Nouh</div>
                             <div class="text-muted small">{{ post.created_at }}</div>
                         </div>
 
@@ -171,7 +171,6 @@ export default {
         },
         
         async UpdateOffre(id) {
-            console.log(id+"hh");
             const res = await fetch ('http://localhost:8000/api/UpdateOffre/'+id, {
                 method: 'POST',
                 headers: header,
